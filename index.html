@@ -23,6 +23,7 @@
       <li><a href="#solutions">Solutions</a></li>
       <li><a href="#impact">Impact</a></li>
       <li><a href="#sdg">SDGs</a></li>
+      <li><a href="#calculators">Calculators</a></li>
     </ul>
   </nav>
 
@@ -298,6 +299,227 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- CALCULATORS -->
+  <section class="section" id="calculators">
+    <div class="container">
+      <div class="section-tag reveal">Interactive Tools</div>
+      <h2 class="section-title reveal">Environmental Calculators</h2>
+      <p class="calc-intro reveal">Use these science-based calculators to estimate pollution levels, afforestation needs, oxygen production, and greenhouse gas concentrations in real time.</p>
+
+      <div class="calc-tabs reveal">
+        <button class="calc-tab active" data-tab="pollution">🏭 Pollution Index</button>
+        <button class="calc-tab" data-tab="afforestation">🌳 Afforestation</button>
+        <button class="calc-tab" data-tab="oxygen">🌬️ Oxygen Production</button>
+        <button class="calc-tab" data-tab="ghg">☁️ Greenhouse Gas</button>
+        <button class="calc-tab" data-tab="carbon">🚗 Carbon Footprint</button>
+      </div>
+
+      <!-- POLLUTION CALCULATOR -->
+      <div class="calc-panel active" id="tab-pollution">
+        <div class="calc-card">
+          <div class="calc-header">
+            <div class="calc-icon-wrap"><i class="fas fa-smog"></i></div>
+            <div>
+              <h3>Air Pollution Index Calculator</h3>
+              <p>Estimate the Air Quality Index (AQI) based on pollutant concentrations.</p>
+            </div>
+          </div>
+          <div class="calc-body">
+            <div class="calc-inputs">
+              <div class="input-group">
+                <label>PM2.5 Concentration (µg/m³) <span class="info-tip" title="Fine particulate matter — main source: vehicle exhaust, fires">?</span></label>
+                <input type="number" id="pm25" placeholder="e.g. 45" min="0" max="500" />
+              </div>
+              <div class="input-group">
+                <label>PM10 Concentration (µg/m³) <span class="info-tip" title="Coarse particles — dust, pollen, mould spores">?</span></label>
+                <input type="number" id="pm10" placeholder="e.g. 80" min="0" max="600" />
+              </div>
+              <div class="input-group">
+                <label>CO₂ Level (ppm) <span class="info-tip" title="Normal outdoor CO₂ is ~420 ppm; >1000 ppm indoors is poor">?</span></label>
+                <input type="number" id="co2ppm" placeholder="e.g. 420" min="300" max="5000" />
+              </div>
+              <div class="input-group">
+                <label>NO₂ Level (µg/m³) <span class="info-tip" title="Mainly from vehicle exhaust and power plants">?</span></label>
+                <input type="number" id="no2" placeholder="e.g. 25" min="0" max="400" />
+              </div>
+              <div class="input-group">
+                <label>SO₂ Level (µg/m³) <span class="info-tip" title="Mainly from burning coal and oil">?</span></label>
+                <input type="number" id="so2" placeholder="e.g. 20" min="0" max="500" />
+              </div>
+            </div>
+            <button class="calc-btn" onclick="calcPollution()">Calculate AQI</button>
+            <div class="calc-result" id="pollution-result"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AFFORESTATION CALCULATOR -->
+      <div class="calc-panel" id="tab-afforestation">
+        <div class="calc-card">
+          <div class="calc-header">
+            <div class="calc-icon-wrap green"><i class="fas fa-tree"></i></div>
+            <div>
+              <h3>Afforestation Impact Calculator</h3>
+              <p>Find out how many trees you need to plant to offset CO₂ and restore ecosystem balance.</p>
+            </div>
+          </div>
+          <div class="calc-body">
+            <div class="calc-inputs">
+              <div class="input-group">
+                <label>Annual CO₂ to Offset (tonnes) <span class="info-tip" title="1 tonne = 1000 kg of CO₂">?</span></label>
+                <input type="number" id="co2offset" placeholder="e.g. 10" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Tree Species Type</label>
+                <select id="treeType">
+                  <option value="tropical">Tropical (e.g. Teak, Mahogany) — ~22 kg CO₂/yr</option>
+                  <option value="temperate">Temperate (e.g. Oak, Maple) — ~16 kg CO₂/yr</option>
+                  <option value="pine">Pine / Conifer — ~10 kg CO₂/yr</option>
+                  <option value="bamboo">Bamboo — ~35 kg CO₂/yr</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label>Land Area Available (acres)</label>
+                <input type="number" id="landArea" placeholder="e.g. 5" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Target Years for Full Growth</label>
+                <input type="number" id="growthYears" placeholder="e.g. 20" min="1" max="100" />
+              </div>
+            </div>
+            <button class="calc-btn green" onclick="calcAfforestation()">Calculate</button>
+            <div class="calc-result" id="afforestation-result"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OXYGEN CALCULATOR -->
+      <div class="calc-panel" id="tab-oxygen">
+        <div class="calc-card">
+          <div class="calc-header">
+            <div class="calc-icon-wrap sky"><i class="fas fa-wind"></i></div>
+            <div>
+              <h3>Oxygen Production Calculator</h3>
+              <p>Estimate how much oxygen trees and forests generate, and how many people they can sustain.</p>
+            </div>
+          </div>
+          <div class="calc-body">
+            <div class="calc-inputs">
+              <div class="input-group">
+                <label>Number of Trees</label>
+                <input type="number" id="numTrees" placeholder="e.g. 500" min="1" />
+              </div>
+              <div class="input-group">
+                <label>Average Tree Age (years)</label>
+                <input type="number" id="treeAge" placeholder="e.g. 10" min="1" max="500" />
+              </div>
+              <div class="input-group">
+                <label>Forest Type</label>
+                <select id="forestType">
+                  <option value="tropical">Tropical Rainforest</option>
+                  <option value="temperate">Temperate Forest</option>
+                  <option value="boreal">Boreal / Taiga</option>
+                  <option value="mangrove">Mangrove</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label>Season / Sunlight Hours per Day</label>
+                <input type="number" id="sunHours" placeholder="e.g. 8" min="1" max="16" />
+              </div>
+            </div>
+            <button class="calc-btn sky" onclick="calcOxygen()">Calculate O₂</button>
+            <div class="calc-result" id="oxygen-result"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GREENHOUSE GAS CALCULATOR -->
+      <div class="calc-panel" id="tab-ghg">
+        <div class="calc-card">
+          <div class="calc-header">
+            <div class="calc-icon-wrap amber"><i class="fas fa-cloud"></i></div>
+            <div>
+              <h3>Greenhouse Gas Concentration Calculator</h3>
+              <p>Model how human activities increase atmospheric GHG levels and warming potential.</p>
+            </div>
+          </div>
+          <div class="calc-body">
+            <div class="calc-inputs">
+              <div class="input-group">
+                <label>Annual CO₂ Emissions (million tonnes)</label>
+                <input type="number" id="ghgCO2" placeholder="e.g. 37000" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Annual CH₄ Emissions (million tonnes) <span class="info-tip" title="Methane — 84× more potent than CO₂ over 20 years">?</span></label>
+                <input type="number" id="ghgCH4" placeholder="e.g. 400" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Annual N₂O Emissions (million tonnes) <span class="info-tip" title="Nitrous oxide — 273× more potent than CO₂ over 100 years">?</span></label>
+                <input type="number" id="ghgN2O" placeholder="e.g. 10" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Projection Period (years)</label>
+                <input type="number" id="ghgYears" placeholder="e.g. 50" min="1" max="200" />
+              </div>
+            </div>
+            <button class="calc-btn amber" onclick="calcGHG()">Calculate GWP</button>
+            <div class="calc-result" id="ghg-result"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARBON FOOTPRINT CALCULATOR -->
+      <div class="calc-panel" id="tab-carbon">
+        <div class="calc-card">
+          <div class="calc-header">
+            <div class="calc-icon-wrap coral"><i class="fas fa-car"></i></div>
+            <div>
+              <h3>Personal Carbon Footprint Calculator</h3>
+              <p>Estimate your annual CO₂ emissions from daily lifestyle choices.</p>
+            </div>
+          </div>
+          <div class="calc-body">
+            <div class="calc-inputs">
+              <div class="input-group">
+                <label>Car Travel (km/day)</label>
+                <input type="number" id="carKm" placeholder="e.g. 30" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Vehicle Fuel Type</label>
+                <select id="fuelType">
+                  <option value="petrol">Petrol / Gasoline</option>
+                  <option value="diesel">Diesel</option>
+                  <option value="cng">CNG / LPG</option>
+                  <option value="ev">Electric Vehicle</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label>Monthly Electricity Consumption (kWh)</label>
+                <input type="number" id="electricity" placeholder="e.g. 200" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Flights per Year (economy class)</label>
+                <input type="number" id="flights" placeholder="e.g. 2" min="0" />
+              </div>
+              <div class="input-group">
+                <label>Diet Type</label>
+                <select id="dietType">
+                  <option value="meat_heavy">Meat-heavy</option>
+                  <option value="average">Average / Mixed</option>
+                  <option value="vegetarian">Vegetarian</option>
+                  <option value="vegan">Vegan</option>
+                </select>
+              </div>
+            </div>
+            <button class="calc-btn coral" onclick="calcCarbonFootprint()">Calculate Footprint</button>
+            <div class="calc-result" id="carbon-result"></div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
